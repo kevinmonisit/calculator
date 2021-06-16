@@ -10,16 +10,20 @@
 </head>
 <body>
     <div id='calculator-container'>
-        <div id='display'></div>
-        <button id='AC' grid-area="AC">AC</button>
-        <button id="sign" name='addition'>+/-</button>
-        <button id='modulo' name='modulo'>%</button>
-        <button id='divide' name='divide'>/</button>
-        <button id='multiply' name='multiply'>X</button>
-        <button id='subtract' name='subtract'>-</button>
-        <button id='add' name='add'>+</button>
-        <button id='decimal' name='decimal'>.</button>
-        <button id='equals' name='equals to'>=</button>
+        <div id='display'>
+            <span>
+                1000000
+            </span>
+        </div>
+        <button id='AC' style='grid-area: AC' class='top-row'>AC</button>
+        <button id="sign" style='grid-area: sign' name='addition' class='top=row'>+/-</button>
+        <button id='modulo' style='grid-area: modulo' name='modulo' class='top-row'>%</button>
+        <button id='divide' style='grid-area: divide' name='divide' class='left-most-column'>/</button>
+        <button id='multiply' style='grid-area: times' name='multiply' class='left-most-column'>X</button>
+        <button id='subtract' style='grid-area: subtract' name='subtract' class='left-most-column'>-</button>
+        <button id='add' style='grid-area: add' name='add' class='left-most-column'>+</button>
+        <button id='decimal' style='grid-area: decimal' name='decimal'>.</button>
+        <button id='equals' style='grid-area: equals' name='equals to' class='left-most-column'>=</button>
     </div>
 </body>
 
