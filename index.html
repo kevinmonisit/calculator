@@ -11,9 +11,12 @@
 <body>
     <div id='calculator-container'>
         <div id='display'>
-            <span>
-                1000000
-            </span>
+            <div id='calculation-history'>
+                <div>100</div>
+            </div>
+            <div id='current-number'>
+                <span id='current-number-text'>100</span>
+            </div>
         </div>
         <button id='AC' style='grid-area: AC' class='top-row'>AC</button>
         <button id="sign" style='grid-area: sign' name='addition' class='top=row'>+/-</button>
@@ -22,7 +25,6 @@
         <button id='multiply' style='grid-area: times' name='multiply' class='left-most-column'>X</button>
         <button id='subtract' style='grid-area: subtract' name='subtract' class='left-most-column'>-</button>
         <button id='add' style='grid-area: add' name='add' class='left-most-column'>+</button>
-        <button id='decimal' style='grid-area: decimal' name='decimal'>.</button>
         <button id='equals' style='grid-area: equals' name='equals to' class='left-most-column'>=</button>
     </div>
 </body>
