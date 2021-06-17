@@ -48,9 +48,9 @@ const lastNumberTextContainer = document.getElementById('previous-number');
  */
 function adjustCurrentNumber(value) {
     if (currNumber.length >= 15) return;
-    console.log(currNumber);
+    const value_ = value.toString();
     if (currNumber === '0' || currNumber == '-0') {
-        currNumber = value.toString();
+        currNumber = currNumber.charAt(0) !== '-' ? value_ : `-${value_}`;
     } else if (currNumber !== '0') {
         currNumber += value.toString();
     }
@@ -60,8 +60,7 @@ function adjustCurrentNumber(value) {
  * Changes the current number within the display
  * @param {value} value to change to
  */
-function updateNumbers(value) {
-    currNumber = value;
+function updateNumbers() {
     currNumberTextContainer.innerText = currNumber;
     lastNumberTextContainer.innerText = lastNumber;
 }
@@ -84,6 +83,7 @@ function toggleSign() {
 function clearNumbers() {
     currNumber = '0';
     lastNumber = '0';
+    lastOperatorUsed = null;
 }
 
 /**
@@ -155,19 +155,19 @@ numberButtons.forEach((button) => {
 
 changeSignButton.addEventListener('click', () => {
     toggleSign();
-    updateNumbers(currNumber);
+    updateNumbers();
 });
 
 clearButton.addEventListener('click', () => {
     clearNumbers();
-    updateNumbers(currNumber);
+    updateNumbers();
 });
 
 operatorButtons.forEach((operator) => {
     operator.addEventListener('click', () => {
         applyOperation(operator.getAttribute('name'));
         console.log('Last number: ' + lastNumber);
-        updateNumbers(currNumber);
+        updateNumbers();
     });
 });
 
@@ -175,6 +175,6 @@ equalsButton.addEventListener('click', () => {
     if (lastOperatorUsed !== null) {
         // debugger;
         applyOperation(lastOperatorUsed);
-        updateNumbers(currNumber);
+        updateNumbers();
     }
 });
