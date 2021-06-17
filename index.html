@@ -12,20 +12,22 @@
     <div id='calculator-container'>
         <div id='display'>
             <div id='calculation-history'>
-                <div>100</div>
+                <div id='previous-number'>0</div>
             </div>
             <div id='current-number'>
-                <span id='current-number-text'>100</span>
+                <span id='current-number-text'>0</span>
             </div>
         </div>
         <button id='AC' style='grid-area: AC' class='top-row'>AC</button>
-        <button id="sign" style='grid-area: sign' name='addition' class='top=row'>+/-</button>
-        <button id='modulo' style='grid-area: modulo' name='modulo' class='top-row'>%</button>
-        <button id='divide' style='grid-area: divide' name='divide' class='left-most-column'>/</button>
-        <button id='multiply' style='grid-area: times' name='multiply' class='left-most-column'>X</button>
-        <button id='subtract' style='grid-area: subtract' name='subtract' class='left-most-column'>-</button>
-        <button id='add' style='grid-area: add' name='add' class='left-most-column'>+</button>
-        <button id='equals' style='grid-area: equals' name='equals to' class='left-most-column'>=</button>
+        <button id="sign" style='grid-area: sign' name='addition' class='top=row'>
+            +/-
+        </button>
+        <button id='modulo' style='grid-area: modulo' name='modulo' class='top-row operator'>%</button>
+        <button id='divide' style='grid-area: divide' name='divide' class='left-most-column operator'>/</button>
+        <button id='multiply' style='grid-area: times' name='multiply' class='left-most-column operator'>X</button>
+        <button id='subtract' style='grid-area: subtract' name='subtract' class='left-most-column operator'>-</button>
+        <button id='add' style='grid-area: add' name='add' class='left-most-column operator'>+</button>
+        <button id='equals' style='grid-area: equals' name='equals to' class='left-most-column operator'>=</button>
     </div>
 </body>
 
