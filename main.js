@@ -37,6 +37,7 @@ for (num in numbers) {
 
 let currNumber = '0';
 let lastNumber = '0';
+let lastOperatorUsed = null;
 const currNumberTextContainer = document.getElementById('current-number-text');
 const lastNumberTextContainer = document.getElementById('previous-number');
 
@@ -48,7 +49,7 @@ const lastNumberTextContainer = document.getElementById('previous-number');
 function adjustCurrentNumber(value) {
     if (currNumber.length >= 15) return;
     console.log(currNumber);
-    if (currNumber === '0') {
+    if (currNumber === '0' || currNumber == '-0') {
         currNumber = value.toString();
     } else if (currNumber !== '0') {
         currNumber += value.toString();
@@ -82,6 +83,7 @@ function toggleSign() {
  */
 function clearNumbers() {
     currNumber = '0';
+    lastNumber = '0';
 }
 
 /**
@@ -92,6 +94,7 @@ function clearNumbers() {
  * @param {string} operation the operation to apply to the two operands
  */
 function applyOperation(operation) {
+    lastOperatorUsed = operation;
     if (lastNumber === '0') {
         lastNumber = currNumber;
         currNumber = '0';
@@ -127,8 +130,7 @@ function applyOperation(operation) {
             throw new Error(`Unknown operation ${operation}`);
     }
 
-    //debugger;
-    lastNumber = Number(newNumber);
+    lastNumber = Number(newNumber).toFixed(5);
 }
 
 // ================== Event Listening for Buttons ================
@@ -136,12 +138,12 @@ function applyOperation(operation) {
 const numberButtons = document.querySelectorAll('.calc-button');
 const changeSignButton = document.getElementById('sign');
 const clearButton = document.getElementById('AC');
+const equalsButton = document.getElementById('equals');
 
 const operatorButtons = document.querySelectorAll('.operator');
 
 numberButtons.forEach((button) => {
     button.addEventListener('click', () => {
-        //debugger;
         // button ids are button-{num} where num is the corresponding number
         const numericValueOfButton =
             numbers[button.getAttribute('id').split('-')[1]];
@@ -167,4 +169,12 @@ operatorButtons.forEach((operator) => {
         console.log('Last number: ' + lastNumber);
         updateNumbers(currNumber);
     });
+});
+
+equalsButton.addEventListener('click', () => {
+    if (lastOperatorUsed !== null) {
+        // debugger;
+        applyOperation(lastOperatorUsed);
+        updateNumbers(currNumber);
+    }
 });
