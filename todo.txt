@@ -1,12 +1,12 @@
 Minimum Viable:
 
-- Get calculations in order
-- BigInt use
-- Add maximum width of number
+- Get calculations in order - Done
+- BigInt use (automatic) - Done
+- Add maximum width of number - Done
 
 Extra:
 
 - Add animations to the change of numbers (sliding)
-- Add more styling (e.g. top-row darkened)
-- Add curved borders
+- Add more styling (e.g. top-row darkened) - Done
+- Add curved borders - Done
 - Fix AC and C functionality

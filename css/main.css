@@ -1,5 +1,5 @@
 :root {
-    --number-offset: 10px;
+    --number-offset: 8px;
 }
 
 html, body {
@@ -68,7 +68,9 @@ body {
 }
 
 #calculation-history div{
-    margin: var(--number-offset) var(--number-offset) 0px 0px;
+    position:absolute;
+    top: var(--number-offset);
+    right: var(--number-offset);
 }
 
 #current-number-text {
