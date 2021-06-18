@@ -32,14 +32,16 @@ for (num in numbers) {
     }
 }
 
-
 // ================== Number Logic ================
 
 let currNumber = '0';
 let lastNumber = '0';
 let lastOperatorUsed = null;
+const MAX_NUMBER_LENGTH = 13;
+
 const currNumberTextContainer = document.getElementById('current-number-text');
 const lastNumberTextContainer = document.getElementById('previous-number');
+const currOperator = document.getElementById('current-operator');
 
 /**
  * Accepts single digits and adds those digits
@@ -47,7 +49,21 @@ const lastNumberTextContainer = document.getElementById('previous-number');
  * @param {value} value to add to currNumber
  */
 function adjustCurrentNumber(value) {
-    if (currNumber.length >= 15) return;
+    if (currNumber.length >= MAX_NUMBER_LENGTH) return;
+//    if (currNumber.includes('.') && currNumber.split('.').length == 1) return;
+
+    if (value === '.') {
+        if (currNumber.includes('.')) {
+            return;
+        } else if (currNumber === '0' || currNumber === '' ) {
+            currNumber = '0.';
+        } else {
+            currNumber = currNumber + '.';
+        }
+
+        return;
+    }
+
     const value_ = value.toString();
     if (currNumber === '0' || currNumber == '-0') {
         currNumber = currNumber.charAt(0) !== '-' ? value_ : `-${value_}`;
@@ -58,7 +74,6 @@ function adjustCurrentNumber(value) {
 
 /**
  * Changes the current number within the display
- * @param {value} value to change to
  */
 function updateNumbers() {
     currNumberTextContainer.innerText = currNumber;
@@ -73,8 +88,17 @@ function toggleSign() {
     if (currNumber.charAt(0) === '-') {
         currNumber = currNumber.substring(1);
     } else {
-        currNumber = `-${currNumber}`;
+        currNumber = currNumber.length > 0 ? `-${currNumber}` : '-0';
     }
+}
+/**
+ * Updates the operator remind in the calculator's
+ * display.
+ * @param {operator} operator takes an valid operator string
+ */
+function updateCurrOperatorText(operator) {
+    console.log(operator);
+    currOperator.innerText = operator;
 }
 
 /**
@@ -83,7 +107,6 @@ function toggleSign() {
 function clearNumbers() {
     currNumber = '0';
     lastNumber = '0';
-    lastOperatorUsed = null;
 }
 
 /**
@@ -92,12 +115,23 @@ function clearNumbers() {
  *
  * Sets the current number to 0 as well.
  * @param {string} operation the operation to apply to the two operands
+ * @param {string} symbol the symbol to set the current operator to
  */
-function applyOperation(operation) {
+function applyOperation(operation, symbol) {
     lastOperatorUsed = operation;
+
+    if (symbol) {
+        console.log(symbol);
+        updateCurrOperatorText(symbol);
+    }
+
+    if (currNumber == '') {
+        return;
+    }
+
     if (lastNumber === '0') {
         lastNumber = currNumber;
-        currNumber = '0';
+        currNumber = '';
         return;
     }
 
@@ -106,7 +140,7 @@ function applyOperation(operation) {
 
     let newNumber = 0;
 
-    currNumber = '0';
+    currNumber = '';
     switch (operation) {
         case 'add':
             newNumber = lastNumberTemp + currNumberTemp;
@@ -130,7 +164,7 @@ function applyOperation(operation) {
             throw new Error(`Unknown operation ${operation}`);
     }
 
-    lastNumber = Number(newNumber).toFixed(5);
+    lastNumber = newNumber % 1 != 0 ? newNumber.toFixed(3) : newNumber;
 }
 
 // ================== Event Listening for Buttons ================
@@ -155,19 +189,20 @@ numberButtons.forEach((button) => {
 
 changeSignButton.addEventListener('click', () => {
     toggleSign();
-    updateNumbers();
+    updateNumbers(currNumber);
 });
 
 clearButton.addEventListener('click', () => {
     clearNumbers();
-    updateNumbers();
+    updateNumbers(currNumber);
 });
 
 operatorButtons.forEach((operator) => {
     operator.addEventListener('click', () => {
-        applyOperation(operator.getAttribute('name'));
-        console.log('Last number: ' + lastNumber);
-        updateNumbers();
+        console.log('Event Listener: ' + operator.innerText);
+        applyOperation(operator.getAttribute('name'), operator.innerText);
+
+        updateNumbers(currNumber);
     });
 });
 
@@ -175,6 +210,6 @@ equalsButton.addEventListener('click', () => {
     if (lastOperatorUsed !== null) {
         // debugger;
         applyOperation(lastOperatorUsed);
-        updateNumbers();
+        updateNumbers(currNumber);
     }
 });

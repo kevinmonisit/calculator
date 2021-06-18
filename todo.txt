@@ -2,6 +2,7 @@ Minimum Viable:
 
 - Get calculations in order
 - BigInt use
+- Add maximum width of number
 
 Extra:
 

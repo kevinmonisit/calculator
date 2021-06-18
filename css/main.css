@@ -38,6 +38,13 @@ body {
     justify-content: right;
 }
 
+#current-operator {
+    position: absolute;
+    bottom: 5px;
+    left: 5px;
+    font-size: 1rem;
+}
+
 #display > div {
     color:white;
     width:100%;
@@ -51,7 +58,7 @@ body {
     margin: 10px 5px 0px 0px;
 }
 
-#current-number span{
+#current-number-text {
     position:absolute;
     bottom: 5px;
     right:5px;
