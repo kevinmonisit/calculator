@@ -37,7 +37,7 @@ for (num in numbers) {
 let currNumber = '0';
 let lastNumber = '0';
 let lastOperatorUsed = null;
-const MAX_NUMBER_LENGTH = 13;
+const MAX_NUMBER_LENGTH = 12;
 
 const currNumberTextContainer = document.getElementById('current-number-text');
 const lastNumberTextContainer = document.getElementById('previous-number');
@@ -50,7 +50,6 @@ const currOperator = document.getElementById('current-operator');
  */
 function adjustCurrentNumber(value) {
     if (currNumber.length >= MAX_NUMBER_LENGTH) return;
-//    if (currNumber.includes('.') && currNumber.split('.').length == 1) return;
 
     if (value === '.') {
         if (currNumber.includes('.')) {
@@ -77,7 +76,14 @@ function adjustCurrentNumber(value) {
  */
 function updateNumbers() {
     currNumberTextContainer.innerText = currNumber;
-    lastNumberTextContainer.innerText = lastNumber;
+
+    let tempLastNumber = lastNumber.toString();
+    if (tempLastNumber.toString().length > MAX_NUMBER_LENGTH) {
+        tempLastNumber = lastNumber.toExponential(MAX_NUMBER_LENGTH - 3);
+    } else {
+        tempLastNumber = lastNumber;
+    }
+    lastNumberTextContainer.innerText = tempLastNumber;
 }
 
 /**
@@ -208,7 +214,6 @@ operatorButtons.forEach((operator) => {
 
 equalsButton.addEventListener('click', () => {
     if (lastOperatorUsed !== null) {
-        // debugger;
         applyOperation(lastOperatorUsed);
         updateNumbers(currNumber);
     }

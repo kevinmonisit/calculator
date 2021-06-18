@@ -1,3 +1,7 @@
+:root {
+    --number-offset: 10px;
+}
+
 html, body {
     width:100%;
     height:100%;
@@ -11,9 +15,10 @@ body {
 
 #calculator-container {
     margin: auto 0;
-    width: 30vw;
+    width:300px;
     min-width:300px;
-    max-width:320px;
+    max-width:300px;
+    flex-grow: 0;
 
     height:400px;
     display:grid;
@@ -25,7 +30,9 @@ body {
         'seven eight nine times'
         'four five six subtract'
         'one two three add'
-        'zero zero decimal equals'
+        'zero zero decimal equals';
+    border-radius: 23px;
+    box-shadow: 5px 5px white, 13px 13px rgb(0, 0, 156);
 }
 
 #display {
@@ -36,13 +43,19 @@ body {
     display:flex;
     flex-direction:column;
     justify-content: right;
+
+    border-radius: 15px 15px 0px 0px;
+}
+
+#equals {
+    border-radius: 0px 0px 20px 0px;
 }
 
 #current-operator {
     position: absolute;
-    bottom: 5px;
-    left: 5px;
-    font-size: 1rem;
+    bottom: var(--number-offset);
+    left: var(--number-offset);
+    font-size: 1.3rem;
 }
 
 #display > div {
@@ -55,18 +68,19 @@ body {
 }
 
 #calculation-history div{
-    margin: 10px 5px 0px 0px;
+    margin: var(--number-offset) var(--number-offset) 0px 0px;
 }
 
 #current-number-text {
     position:absolute;
-    bottom: 5px;
-    right:5px;
+    bottom: var(--number-offset);
+    right: var(--number-offset);
 }
 
 .left-most-column {
     background-color: #e95058;
     border-top: 1px solid #ce0f19;
+    border-right: 1px solid #ce0f19;
     border-bottom:1px solid #ce0f19;
 }
 .left-most-column:hover,
@@ -75,7 +89,11 @@ body {
 }
 
 .top-row {
-    /*Add additional styling here*/
+    background-color: #125cb6;
+}
+
+.top-row:hover {
+    background-color: #0d4d9c;
 }
 
 /*
@@ -108,7 +126,7 @@ button {
 }
 
 button:hover {
-    background: #0053ba;
+    background: #035dcc;
 }
 
 /* button:focus {
